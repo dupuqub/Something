@@ -10,9 +10,9 @@ public class Controller : MonoBehaviour
     float delta = Time.deltaTime;
 
     if(gamepad.LSX != 0) transform.Rotate(Vector3.up, gamepad.LSX * delta * 100f);
-    if(gamepad.LSY != 0) transform.Rotate(Vector3.left, gamepad.LSY * delta * 100f);
+    if(gamepad.LSY != 0) transform.Rotate(-Vector3.right, gamepad.LSY * delta * 100f);
 
     if(!gamepad.LB && gamepad.RB) transform.Rotate(Vector3.forward, delta * 100f);
-    else if(gamepad.LB && !gamepad.RB) transform.Rotate(Vector3.back, delta * 100f);
+    else if(gamepad.LB && !gamepad.RB) transform.Rotate(-Vector3.forward, delta * 100f);
   }
 }
