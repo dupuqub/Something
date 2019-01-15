@@ -14,11 +14,15 @@ public class CameraFollow : MonoBehaviour
 
     GameObject guide = GameObject.Find("CameraGuide" + horizontal + vertical);
     Vector3 guideVect = guide.transform.position;
-    Quaternion guideQuat = guide.transform.rotation;
-    Vector3 guideEuler = guideQuat.eulerAngles;
+    Vector3 guideEuler = guide.transform.rotation.eulerAngles;
     Quaternion newQuat = Quaternion.Euler(guideEuler.x, guideEuler.y, guideEuler.z + diagonal);
 
     transform.position = Vector3.Lerp(transform.position, guideVect, delta * 10f);
     transform.rotation = Quaternion.Lerp(transform.rotation, newQuat, delta * 10f);
+
+    // Notes.
+    // Ship going down should be on top of the screen (point is too low! Watch for the issue below after fixing).
+    // Ship going up should be less inclined (is point too high?).
+    // Ship rolling is possibly snapping too hard.
   }
 }
