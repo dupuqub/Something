@@ -8,6 +8,7 @@ public class CameraGuideMove : MonoBehaviour
   {
     // Gamepad.
     GamepadXbox360 gamepad = new GamepadXbox360();
+    float LSX = gamepad.LSX;
     float LSY = gamepad.LSY;
     bool LB = gamepad.LB;
     bool RB = gamepad.RB;
@@ -23,7 +24,7 @@ public class CameraGuideMove : MonoBehaviour
 
     // Rotation.
     // (Not working, each step adds "gamepad.LSX * 15f" instead of setting it to "gamepad.LSX * 15f").
-    float newTilt = gamepad.LSX * 15f;
+    float newTilt = LSX * 15f;
     Vector3 euler = transform.localEulerAngles;
     Quaternion newRotation = Quaternion.Euler(euler.x, euler.y, newTilt);
 
