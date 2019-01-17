@@ -12,10 +12,10 @@ public class CameraGuideMove : MonoBehaviour
     bool LB = gamepad.LB;
     bool RB = gamepad.RB;
 
-    float x = LB && !RB ? -2f : !LB && RB ? 2f : 0f;
-    float y = 12f; // Future acceleration.
+    float x = LB && !RB ? -3f : !LB && RB ? 3f : 0f;
+    float y = 12f; // Will adapt to acceleration.
     float z = LSY > 0 ? 5f + LSY : LSY < 0 ? 5f * (LSY + 0.5f) : 5f;
-    float tilt = LSX * 20f;
+    float tilt = LSX * -30f;
 
     // "0.5f" at "z" is the gamepad's deadzone visual compensation.
 
