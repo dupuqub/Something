@@ -6,18 +6,16 @@ public class CameraFollow : MonoBehaviour
 {
   void FixedUpdate()
   {
-    GamepadXbox360 gamepad = new GamepadXbox360();
-    float delta = Time.deltaTime;
+    GameObject guide = GameObject.Find("CameraGuide");
 
-    string axisX = gamepad.LB && !gamepad.RB ? "Left" : !gamepad.LB && gamepad.RB ? "Right" : "";
-    float axisZ = gamepad.LSX != 0 ? gamepad.LSX * 15f : 0;
+    Vector3 oldPosition = transform.position;
+    Vector3 newPosition = guide.transform.position;
+    Quaternion oldRotation = transform.rotation;
+    Quaternion newRotation = guide.transform.rotation;
 
-    GameObject guide = GameObject.Find("CameraGuide" + axisX);
-    Vector3 guideVect = guide.transform.position;
-    Vector3 guideEuler = guide.transform.rotation.eulerAngles;
-    Quaternion guideQuat = Quaternion.Euler(guideEuler.x, guideEuler.y, guideEuler.z + axisZ);
+    float strength = Time.deltaTime * 10f;
 
-    transform.position = Vector3.Lerp(transform.position, guideVect, delta * 10f);
-    transform.rotation = Quaternion.Lerp(transform.rotation, guideQuat, delta * 10f);
+    transform.position = Vector3.Lerp(oldPosition, newPosition, strength);
+    transform.rotation = Quaternion.Lerp(oldRotation, newRotation, strength);
   }
 }
