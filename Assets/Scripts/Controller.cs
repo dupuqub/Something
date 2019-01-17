@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+  public float strength = 2f;
+
   void FixedUpdate()
   {
     GamepadXbox360 gamepad = new GamepadXbox360();
-    float delta = Time.deltaTime;
+    float LSX = gamepad.LSX;
+    float LSY = gamepad.LSY;
+    bool LB = gamepad.LB;
+    bool RB = gamepad.RB;
 
-    if(gamepad.LSX != 0) transform.Rotate(Vector3.up, gamepad.LSX * delta * 100f);
-    if(gamepad.LSY != 0) transform.Rotate(-Vector3.right, gamepad.LSY * delta * 100f);
+    Rigidbody rigid = gameObject.GetComponent<Rigidbody>();
 
-    if(!gamepad.LB && gamepad.RB) transform.Rotate(Vector3.forward, delta * 100f);
-    else if(gamepad.LB && !gamepad.RB) transform.Rotate(-Vector3.forward, delta * 100f);
+    if(LSX != 0) rigid.AddTorque(transform.up * strength * LSX);
+    if(LSY != 0) rigid.AddTorque(-transform.right * strength * LSY);
+
+    if(!LB && RB) rigid.AddTorque(transform.forward * strength);
+    else if(LB && !RB) rigid.AddTorque(-transform.forward * strength);
   }
 }
