@@ -8,14 +8,7 @@ public class CameraMove : MonoBehaviour
   {
     GameObject guide = GameObject.Find("CameraGuide");
 
-    Vector3 oldPosition = transform.position;
-    Vector3 newPosition = guide.transform.position;
-    Quaternion oldRotation = transform.rotation;
-    Quaternion newRotation = guide.transform.rotation;
-
-    float strength = 0.2f;
-
-    transform.position = Vector3.Lerp(oldPosition, newPosition, strength);
-    transform.rotation = Quaternion.Lerp(oldRotation, newRotation, strength);
+    transform.position = Vector3.Lerp(transform.position, guide.transform.position, 0.2f);
+    transform.rotation = Quaternion.Lerp(transform.rotation, guide.transform.rotation, 0.2f);
   }
 }
