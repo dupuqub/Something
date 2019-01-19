@@ -7,13 +7,15 @@ public class CameraGuideMove : MonoBehaviour
   void FixedUpdate()
   {
     GamepadXbox360 gamepad = new GamepadXbox360();
-    float LSX = gamepad.LSX;
-    float LSY = gamepad.LSY;
+    float LSX = gamepad.LSX; // From -1 to 1.
+    float LSY = gamepad.LSY; // From -1 to 1.
+    float LT = gamepad.LT; // From 0 to 1.
+    float RT = gamepad.RT; // From 0 to 1.
     bool LB = gamepad.LB;
     bool RB = gamepad.RB;
 
     float x = LB && !RB ? -3f : !LB && RB ? 3f : 0f;
-    float y = 12f; // Will adapt to acceleration.
+    float y = 12f + (RT - LT) * 4f;
     float z = LSY > 0 ? 5f + LSY : LSY < 0 ? 5f * (LSY + 0.5f) : 5f;
     float tilt = LSX * -30f;
 
