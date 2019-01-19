@@ -21,7 +21,10 @@ public class CameraGuideMove : MonoBehaviour
 
     // "0.5f" at "z" is the gamepad's deadzone visual compensation.
 
-    transform.localPosition = new Vector3(x, y, z);
-    transform.localRotation = Quaternion.Euler(90, tilt, 0);
+    Vector3 newPosition = new Vector3(x, y, z);
+    Quaternion newRotation = Quaternion.Euler(90, tilt, 0);
+
+    transform.localPosition = Vector3.Lerp(transform.localPosition, newPosition, 0.2f);
+    transform.localRotation = Quaternion.Lerp(transform.localRotation, newRotation, 0.2f);
   }
 }
