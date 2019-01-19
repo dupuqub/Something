@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-  void LateUpdate()
+  void Update()
   {
     GameObject guide = GameObject.Find("CameraGuide");
 
